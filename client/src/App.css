@@ -1,0 +1,26 @@
+.container {
+  text-align: center;
+  padding: 20px;
+}
+
+.products {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  width: 200px;
+  border-radius: 8px;
+}
+
+.card img {
+  width: 100%;
+}
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
