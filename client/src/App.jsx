@@ -1,18 +1,30 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import "./App.css";
 
 function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState([]);
-
   const [loggedIn, setLoggedIn] = useState(false);
   const [role, setRole] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/products")
-      .then((res) => setProducts(res.data));
+    setProducts([
+      {
+        id: 1,
+        name: "Laptop",
+        price: 50000,
+        image:
+          "https://www.geekman.in/wp-content/uploads/2021/11/HP-Victus-Gaming-01.jpg",
+      },
+      {
+        id: 2,
+        name: "Phone",
+        price: 20000,
+        image:
+          "https://m.media-amazon.com/images/I/71xb2xkN5qL.jpg",
+      },
+    ]);
   }, []);
 
   const loginAsUser = () => {
@@ -49,7 +61,7 @@ function App() {
     const newOrder = {
       id: Date.now(),
       items: cart,
-      status: "Pending"
+      status: "Pending",
     };
 
     setOrders([...orders, newOrder]);
@@ -106,9 +118,7 @@ function App() {
           </div>
 
           <p>
-            <b>Total: ₹
-            {cart.reduce((sum, item) => sum + item.price, 0)}
-            </b>
+            <b>Total: ₹{cart.reduce((sum, item) => sum + item.price, 0)}</b>
           </p>
 
           <button onClick={placeOrder}>Place Order</button>
@@ -117,9 +127,7 @@ function App() {
           {orders.map((order) => (
             <div className="card" key={order.id}>
               <p>Order ID: {order.id}</p>
-              <p>
-                Status: <span className="status">{order.status}</span>
-              </p>
+              <p>Status: {order.status}</p>
               <p>Items: {order.items.length}</p>
             </div>
           ))}
