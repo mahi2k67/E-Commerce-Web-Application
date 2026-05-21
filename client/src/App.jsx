@@ -5,6 +5,7 @@ import "./App.css";
 function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [role, setRole] = useState("");
@@ -39,6 +40,23 @@ function App() {
     setProducts(updated);
   };
 
+  const placeOrder = () => {
+    if (cart.length === 0) {
+      alert("Cart is empty");
+      return;
+    }
+
+    const newOrder = {
+      id: Date.now(),
+      items: cart,
+      status: "Pending"
+    };
+
+    setOrders([...orders, newOrder]);
+    setCart([]);
+    alert("Order placed!");
+  };
+
   if (!loggedIn) {
     return (
       <div className="container">
@@ -58,7 +76,7 @@ function App() {
 
       {role === "user" && (
         <>
-          <h2>Cart Items: {cart.length}</h2>
+          <h2>Products</h2>
           <div className="products">
             {products.map((product) => (
               <div className="card" key={product.id}>
@@ -71,6 +89,18 @@ function App() {
               </div>
             ))}
           </div>
+
+          <h2>Your Cart ({cart.length})</h2>
+          <button onClick={placeOrder}>Place Order</button>
+
+          <h2>Order Tracking</h2>
+          {orders.map((order) => (
+            <div className="card" key={order.id}>
+              <p>Order ID: {order.id}</p>
+              <p>Status: {order.status}</p>
+              <p>Items: {order.items.length}</p>
+            </div>
+          ))}
         </>
       )}
 
