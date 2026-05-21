@@ -11,14 +11,14 @@ const products = [
   {
     id: 1,
     name: "Laptop",
-    price: 50000,
-    image: "https://via.placeholder.com/150"
+    price: 150000,
+    image: "https://bermorzone.com.ph/wp-content/uploads/2022/01/c22-calhoun-main-image-original-021.webp"
   },
   {
     id: 2,
     name: "Phone",
-    price: 20000,
-    image: "https://via.placeholder.com/150"
+    price: 124999,
+    image: "https://image.gsm.mobi/uploads/big/23/11/Google-Pixel-9-Pro-Rose-Quartz.webp"
   }
 ];
 

@@ -54,13 +54,15 @@ function App() {
 
     setOrders([...orders, newOrder]);
     setCart([]);
-    alert("Order placed!");
+    alert("Order placed successfully!");
   };
 
   if (!loggedIn) {
     return (
       <div className="container">
-        <h1>E-Commerce Login</h1>
+        <h1>🛒 Welcome to E-Commerce Store</h1>
+        <p>Select your role to continue</p>
+
         <button onClick={loginAsUser}>Login as User</button>
         <br /><br />
         <button onClick={loginAsAdmin}>Login as Admin</button>
@@ -70,7 +72,9 @@ function App() {
 
   return (
     <div className="container">
-      <h1>E-Commerce Store</h1>
+      <h1>🛒 E-Commerce Store</h1>
+      <p>Shop smart, track orders easily</p>
+
       <p>Logged in as: <b>{role}</b></p>
       <button onClick={logout}>Logout</button>
 
@@ -91,13 +95,31 @@ function App() {
           </div>
 
           <h2>Your Cart ({cart.length})</h2>
+
+          <div className="products">
+            {cart.map((item, index) => (
+              <div className="card" key={index}>
+                <h3>{item.name}</h3>
+                <p>₹{item.price}</p>
+              </div>
+            ))}
+          </div>
+
+          <p>
+            <b>Total: ₹
+            {cart.reduce((sum, item) => sum + item.price, 0)}
+            </b>
+          </p>
+
           <button onClick={placeOrder}>Place Order</button>
 
           <h2>Order Tracking</h2>
           {orders.map((order) => (
             <div className="card" key={order.id}>
               <p>Order ID: {order.id}</p>
-              <p>Status: {order.status}</p>
+              <p>
+                Status: <span className="status">{order.status}</span>
+              </p>
               <p>Items: {order.items.length}</p>
             </div>
           ))}
@@ -106,12 +128,15 @@ function App() {
 
       {role === "admin" && (
         <>
-          <h2>Admin Product Management</h2>
+          <h2>⚙️ Admin Dashboard</h2>
+
           <div className="products">
             {products.map((product) => (
               <div className="card" key={product.id}>
+                <img src={product.image} alt={product.name} />
                 <h3>{product.name}</h3>
                 <p>₹{product.price}</p>
+
                 <button onClick={() => removeProduct(product.id)}>
                   Delete Product
                 </button>
